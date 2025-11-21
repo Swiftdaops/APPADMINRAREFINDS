@@ -2,23 +2,24 @@
 import { api } from "./httpClient";
 
 export const adminApi = {
-  login: (data) => api.post("/api/admin/login", data),
-  logout: () => api.post("/api/admin/logout"),
-  me: () => api.get("/api/admin/me"),
+  // AppAdmin auth
+  login: (data) => api.post("/api/appadmin/login", data),
+  logout: () => api.post("/api/appadmin/logout"),
+  me: () => api.get("/api/appadmin/me"),
 
   // Owners (bookstore owners)
   listOwners: (status) =>
-    api.get("/api/admin/owners", {
+    api.get("/api/appadmin/owners", {
       params: status ? { status } : {},
     }),
-  approveOwner: (id) => api.patch(`/api/admin/owners/${id}/approve`),
-  rejectOwner: (id) => api.patch(`/api/admin/owners/${id}/reject`),
-  deleteOwner: (id) => api.delete(`/api/admin/owners/${id}`),
+  approveOwner: (id) => api.put(`/api/appadmin/owners/${id}/approve`),
+  rejectOwner: (id) => api.put(`/api/appadmin/owners/${id}/reject`),
+  deleteOwner: (id) => api.delete(`/api/appadmin/owners/${id}`),
 
   // Ebooks
-  listEbooks: () => api.get("/api/ebooks"),
+  listEbooks: () => api.get("/api/appadmin/ebooks"),
 
   // 🆕 THEME ENDPOINTS
-  getTheme: () => api.get("/api/app-settings/theme"),
-  updateTheme: (themeMode) => api.put("/api/admin/app-settings/theme", { themeMode }),
+  getTheme: () => api.get("/api/appadmin/settings/theme"),
+  updateTheme: (themeMode) => api.post("/api/appadmin/settings/theme", { themeMode }),
 };
