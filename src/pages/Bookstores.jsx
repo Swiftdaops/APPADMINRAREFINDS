@@ -6,19 +6,24 @@ import { Button } from "@/components/ui/button";
 
 export default function Bookstores() {
   const [stores, setStores] = useState([]);
-  const [statusFilter, setStatusFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState("all"); // 'approvedRejected' custom option
   const [loading, setLoading] = useState(false);
+  const [deletingId, setDeletingId] = useState(null);
 
   const loadStores = async (status = "all") => {
     setLoading(true);
     try {
-      // If status is "all", call without filter, backend should return all owners
-      const res =
-        status === "all"
-          ? await adminApi.listOwners()
-          : await adminApi.listOwners(status);
-
-      const owners = Array.isArray(res.data) ? res.data : [];
+      // Fetch all if we need combined statuses
+      let res;
+      if (status === "all" || status === "approvedRejected") {
+        res = await adminApi.listOwners();
+      } else {
+        res = await adminApi.listOwners(status);
+      }
+      let owners = Array.isArray(res.data) ? res.data : [];
+      if (status === 'approvedRejected') {
+        owners = owners.filter(o => o.status === 'approved' || o.status === 'rejected');
+      }
       setStores(owners);
     } catch (err) {
       console.error("Failed to load bookstores", err);
@@ -31,16 +36,30 @@ export default function Bookstores() {
     loadStores(statusFilter);
   }, [statusFilter]);
 
-  const filteredLabel =
-    statusFilter === "all" ? (
-      <span className="text-stone-950">All bookstores</span>
-    ) : statusFilter === "pending" ? (
-      <span className="text-stone-950">Pending stores</span>
-    ) : statusFilter === "approved" ? (
-      <span className="text-stone-950">Approved stores</span>
-    ) : (
-      <span className="text-stone-950">Rejected stores</span>
-    );
+  const filteredLabel = (() => {
+    switch (statusFilter) {
+      case 'all': return <span className="text-stone-950">All bookstores</span>;
+      case 'pending': return <span className="text-stone-950">Pending stores</span>;
+      case 'approved': return <span className="text-stone-950">Approved stores</span>;
+      case 'rejected': return <span className="text-stone-950">Rejected stores</span>;
+      case 'approvedRejected': return <span className="text-stone-950">Approved & Rejected stores</span>;
+      default: return <span className="text-stone-950">Stores</span>;
+    }
+  })();
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Delete this owner permanently? This cannot be undone.')) return;
+    setDeletingId(id);
+    try {
+      await adminApi.deleteOwner(id);
+      setStores((prev) => prev.filter(o => o._id !== id));
+    } catch (e) {
+      console.error('Delete failed', e);
+      alert(e?.response?.data?.message || 'Delete failed');
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   return (
     <div className="space-y-4">
@@ -62,8 +81,9 @@ export default function Bookstores() {
           >
             <option value="all" className="text-stone-800">All statuses</option>
             <option value="pending" className="text-stone-800">Pending</option>
-            <option value="approved" className="text-stone-800">Approved</option>
-            <option value="rejected" className="text-stone-800">Rejected</option>
+            <option value="approved" className="text-stone-800">Approved only</option>
+            <option value="rejected" className="text-stone-800">Rejected only</option>
+            <option value="approvedRejected" className="text-stone-800">Approved & Rejected</option>
           </select>
           <Button
             size="sm"
@@ -126,6 +146,28 @@ export default function Bookstores() {
                   >
                     {store.status}
                   </Badge>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-1">
+                  {store.status === 'pending' && (
+                    <>
+                      <Button size="xs" variant="outline" onClick={async () => { await adminApi.approveOwner(store._id); loadStores(statusFilter); }}>
+                        Approve
+                      </Button>
+                      <Button size="xs" variant="destructive" onClick={async () => { await adminApi.rejectOwner(store._id); loadStores(statusFilter); }}>
+                        Reject
+                      </Button>
+                    </>
+                  )}
+                  {(store.status === 'approved' || store.status === 'rejected') && (
+                    <Button
+                      size="xs"
+                      variant="destructive"
+                      disabled={deletingId === store._id}
+                      onClick={() => handleDelete(store._id)}
+                    >
+                      {deletingId === store._id ? 'Deleting…' : 'Delete Owner'}
+                    </Button>
+                  )}
                 </div>
 
                 {/* Bio / description */}

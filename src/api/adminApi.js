@@ -13,6 +13,7 @@ export const adminApi = {
     }),
   approveOwner: (id) => api.patch(`/api/admin/owners/${id}/approve`),
   rejectOwner: (id) => api.patch(`/api/admin/owners/${id}/reject`),
+  deleteOwner: (id) => api.delete(`/api/admin/owners/${id}`),
 
   // Ebooks
   listEbooks: () => api.get("/api/ebooks"),
