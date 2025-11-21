@@ -80,19 +80,6 @@ export default function AdminShell() {
           Owners & Authors
         </NavLink>
         <NavLink
-          to="/bookstores"
-          onClick={() => setMobileOpen(false)}
-          className={({ isActive }) =>
-            `block rounded-2xl px-3 py-2 transition-colors duration-150 ${
-              isActive
-                ? "bg-slate-800 text-emerald-300 border border-slate-700"
-                : "text-slate-300 hover:bg-slate-900"
-            }`
-          }
-        >
-          Bookstores
-        </NavLink>
-        <NavLink
           to="/books"
           onClick={() => setMobileOpen(false)}
           className={({ isActive }) =>
