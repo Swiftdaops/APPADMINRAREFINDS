@@ -46,7 +46,7 @@ export default function AdminShell() {
       <div className="mb-6 flex items-center gap-2 px-2">
         <div className="h-8 w-8 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 shadow-lg shadow-emerald-500/40" />
         <div>
-          <p className="text-xs font-semibold tracking-tight">JOHNBOOKS Admin</p>
+          <p className="text-xs font-semibold tracking-tight">RAREFINDS WEB APP ADMIN</p>
           <p className="text-[10px] text-slate-400">Super admin: {displayName}</p>
         </div>
       </div>
@@ -175,7 +175,7 @@ export default function AdminShell() {
                 </svg>
               </button>
               <div>
-                <p className="text-sm font-semibold text-slate-50">JOHNBOOKS Admin</p>
+                <p className="text-sm font-semibold text-slate-50">RAREFINDS Admin</p>
                 <p className="text-[10px] text-slate-400">Hi, {displayName}</p>
               </div>
             </div>
