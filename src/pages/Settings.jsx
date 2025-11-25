@@ -22,36 +22,36 @@ export default function Settings() {
     "Admin";
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 app-theme card">
       <header>
-        <h1 className="text-base font-semibold text-slate-50">
+        <h1 className="text-base font-semibold">
           Settings
         </h1>
-        <p className="text-[11px] text-slate-400">
+        <p className="text-[11px]">
           Manage your JOHNBOOKS admin profile and session.
         </p>
       </header>
 
       {/* Profile card */}
-      <section className="rounded-3xl border border-slate-800 bg-slate-900/80 p-4 shadow-md shadow-slate-900/80">
-        <h2 className="text-sm font-semibold text-slate-50">
+      <section className="rounded-3xl border p-4 shadow-md">
+        <h2 className="text-sm font-semibold">
           Admin profile
         </h2>
-        <p className="mt-1 text-[11px] text-slate-400">
+        <p className="mt-1 text-[11px]">
           This dashboard is reserved for the main app administrator.
         </p>
 
         <div className="mt-3 grid gap-3 text-[11px] md:grid-cols-2">
           <div className="space-y-1">
-            <p className="text-slate-400">Signed in as</p>
-            <p className="text-sm font-semibold text-slate-50">
+            <p>Signed in as</p>
+            <p className="text-sm font-semibold">
               {adminName}
             </p>
           </div>
 
           <div className="space-y-1">
-            <p className="text-slate-400">Role</p>
-            <p className="text-sm font-semibold text-emerald-400">
+            <p>Role</p>
+            <p className="text-sm font-semibold">
               Super Admin
             </p>
           </div>
@@ -59,11 +59,11 @@ export default function Settings() {
       </section>
 
       {/* Global App Theme */}
-      <section className="rounded-3xl border border-slate-800 bg-slate-900/80 p-4 shadow-md shadow-slate-900/80">
-        <h2 className="text-sm font-semibold text-slate-50">
+      <section className="rounded-3xl border p-4 shadow-md">
+        <h2 className="text-sm font-semibold">
           Global App Theme
         </h2>
-        <p className="mt-1 text-[11px] text-slate-400">
+        <p className="mt-1 text-[11px]">
           Set the default theme for the entire platform (Public App, Admin, Owner Dashboard).
         </p>
 
@@ -75,23 +75,23 @@ export default function Settings() {
             className="flex gap-4"
           >
             <div className="flex items-center space-x-2">
-              <RadioGroupItem value="light" id="light" className="border-slate-500 text-emerald-500" />
-              <Label htmlFor="light" className="text-slate-300">Light</Label>
+              <RadioGroupItem value="light" id="light" />
+              <Label htmlFor="light">Light</Label>
             </div>
             <div className="flex items-center space-x-2">
-              <RadioGroupItem value="dark" id="dark" className="border-slate-500 text-emerald-500" />
-              <Label htmlFor="dark" className="text-slate-300">Dark</Label>
+              <RadioGroupItem value="dark" id="dark" />
+              <Label htmlFor="dark">Dark</Label>
             </div>
           </RadioGroup>
         </div>
       </section>
 
       {/* Session card */}
-      <section className="rounded-3xl border border-slate-800 bg-slate-900/80 p-4 shadow-md shadow-slate-900/80">
-        <h2 className="text-sm font-semibold text-slate-50">
+      <section className="rounded-3xl border p-4 shadow-md">
+        <h2 className="text-sm font-semibold">
           Session & security
         </h2>
-        <p className="mt-1 text-[11px] text-slate-400">
+        <p className="mt-1 text-[11px]">
           For security, always log out when you are done using this
           dashboard, especially on shared devices.
         </p>
@@ -100,11 +100,11 @@ export default function Settings() {
           <Button
             type="button"
             onClick={logout}
-            className="h-8 rounded-2xl bg-emerald-500 px-4 text-[11px] font-semibold text-slate-950 shadow-md shadow-emerald-500/40 hover:bg-emerald-400"
+            className="h-8 rounded-2xl px-4 text-[11px] font-semibold shadow-md"
           >
             Log out of admin session
           </Button>
-          <span className="text-[10px] text-slate-500">
+          <span className="text-[10px]">
             This will clear your admin cookie and require login next time.
           </span>
         </div>

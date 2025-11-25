@@ -37,13 +37,13 @@ export default function Books() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 app-theme card">
       <header className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-base font-semibold text-slate-50">
+          <h1 className="text-base font-semibold">
             All ebooks
           </h1>
-          <p className="text-[11px] text-slate-400">
+          <p className="text-[11px]">
             Browse everything currently listed by your approved stores.
           </p>
         </div>
@@ -54,12 +54,12 @@ export default function Books() {
             placeholder="Search by title, author, store…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="h-8 rounded-2xl border border-slate-700 bg-slate-950/80 px-3 text-[11px] text-slate-50 placeholder:text-slate-500"
+            className="h-8 rounded-2xl px-3 text-[11px] placeholder:text-slate-500"
           />
           <Button
             size="sm"
             variant="outline"
-            className="h-8 rounded-2xl border-slate-700 text-[11px]"
+            className="h-8 rounded-2xl text-[11px]"
             onClick={() => loadEbooks()}
           >
             Refresh
@@ -68,18 +68,18 @@ export default function Books() {
       </header>
 
       {/* Table / list */}
-      <section className="rounded-3xl border border-slate-800 bg-slate-900/80 p-3 shadow-md shadow-slate-900/80">
+      <section className="rounded-3xl border p-3 shadow-sm card">
         {ebooksLoading ? (
-          <div className="flex h-24 items-center justify-center text-[11px] text-slate-400">
+          <div className="flex h-24 items-center justify-center text-[11px]">
             Loading ebooks…
           </div>
         ) : filtered.length === 0 ? (
-          <div className="flex h-24 items-center justify-center text-[11px] text-slate-400">
+          <div className="flex h-24 items-center justify-center text-[11px]">
             No ebooks match this search.
           </div>
         ) : (
           <div className="hidden text-xs text-slate-200 md:block">
-            <div className="grid grid-cols-[2fr,1.2fr,1.2fr,0.8fr] gap-3 border-b border-slate-800 pb-2 text-[11px] text-slate-400">
+            <div className="grid grid-cols-[2fr,1.2fr,1.2fr,0.8fr] gap-3 border-b pb-2 text-[11px]">
               <div>Title</div>
               <div>Author</div>
               <div>Store</div>
@@ -90,39 +90,39 @@ export default function Books() {
                 const owner = book.owner || book.storeOwner || {};
                 return (
                   <div
-                    key={book._id}
-                    className="grid grid-cols-[2fr,1.2fr,1.2fr,0.8fr] items-center gap-3 rounded-2xl border border-slate-800/70 bg-slate-950/70 px-3 py-2"
-                  >
+                      key={book._id}
+                      className="grid grid-cols-[2fr,1.2fr,1.2fr,0.8fr] items-center gap-3 rounded-2xl border px-3 py-2 card"
+                    >
                     <div>
-                      <p className="text-[12px] font-medium text-slate-50 line-clamp-2">
+                      <p className="text-[12px] font-medium line-clamp-2">
                         {book.title}
                       </p>
                       {book.description && (
-                        <p className="mt-0.5 text-[10px] text-slate-500 line-clamp-1">
+                        <p className="mt-0.5 text-[10px] line-clamp-1">
                           {book.description}
                         </p>
                       )}
                     </div>
-                    <div className="text-[11px] text-slate-300">
+                    <div className="text-[11px]">
                       {book.author || "Unknown"}
                     </div>
                     <div className="flex flex-col gap-1">
                       {owner.storeName ? (
-                        <Badge className="w-fit bg-slate-800 text-[9px] text-slate-100">
+                        <Badge className="w-fit text-[9px]">
                           {owner.storeName}
                         </Badge>
                       ) : (
-                        <span className="text-[10px] text-slate-500">
+                        <span className="text-[10px]">
                           No owner linked
                         </span>
                       )}
                       {owner.whatsappNumber && (
-                        <span className="text-[10px] text-slate-500">
+                        <span className="text-[10px]">
                           WhatsApp: {owner.whatsappNumber}
                         </span>
                       )}
                     </div>
-                    <div className="text-right text-[11px] font-semibold text-emerald-400">
+                    <div className="text-right text-[11px] font-semibold">
                       {formatPrice(book.price)}
                     </div>
                   </div>
@@ -134,43 +134,43 @@ export default function Books() {
 
         {/* Mobile list */}
         {!ebooksLoading && filtered.length > 0 && (
-          <div className="space-y-2 text-xs text-slate-200 md:hidden">
+          <div className="space-y-2 md:hidden">
             {filtered.map((book) => {
               const owner = book.owner || book.storeOwner || {};
               return (
                 <div
                   key={book._id}
-                  className="rounded-2xl border border-slate-800/70 bg-slate-950/70 p-3"
+                  className="rounded-2xl border p-3"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <p className="text-[13px] font-semibold text-slate-50">
+                      <p className="text-[13px] font-semibold">
                         {book.title}
                       </p>
-                      <p className="text-[11px] text-slate-400">
+                      <p className="text-[11px]">
                         {book.author || "Unknown"}
                       </p>
                     </div>
-                    <span className="text-[11px] font-semibold text-emerald-400">
+                    <span className="text-[11px] font-semibold">
                       {formatPrice(book.price)}
                     </span>
                   </div>
                   {book.description && (
-                    <p className="mt-1 text-[10px] text-slate-500 line-clamp-2">
+                    <p className="mt-1 text-[10px] line-clamp-2">
                       {book.description}
                     </p>
                   )}
                   <div className="mt-2 flex flex-wrap items-center gap-2">
                     {owner.storeName && (
-                      <Badge className="bg-slate-800 text-[9px] text-slate-100">
+                      <Badge className="text-[9px]">
                         {owner.storeName}
                       </Badge>
                     )}
                     {owner.whatsappNumber && (
-                      <span className="text-[10px] text-slate-500">
-                        WhatsApp: {owner.whatsappNumber}
-                      </span>
-                    )}
+                        <span className="text-[10px]">
+                          WhatsApp: {owner.whatsappNumber}
+                        </span>
+                      )}
                   </div>
                 </div>
               );

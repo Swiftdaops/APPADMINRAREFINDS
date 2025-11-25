@@ -23,13 +23,13 @@ export default function OwnersApproval() {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 app-theme card">
       <header className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-base font-semibold text-slate-50">
+          <h2 className="text-base font-semibold">
             Owners & Authors
           </h2>
-          <p className="text-[11px] text-slate-400">
+          <p className="text-[11px]">
             Review signup requests from bookstores and authors.
           </p>
         </div>
@@ -37,7 +37,7 @@ export default function OwnersApproval() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="h-8 rounded-2xl border border-slate-700 bg-slate-950/80 px-2 text-[11px]"
+            className="h-8 rounded-2xl border px-2 text-[11px]"
           >
             <option value="pending">Pending</option>
             <option value="approved">Approved</option>
@@ -46,7 +46,7 @@ export default function OwnersApproval() {
           <Button
             size="sm"
             variant="outline"
-            className="h-8 rounded-2xl border-slate-700 text-[11px]"
+            className="h-8 rounded-2xl text-[11px]"
             onClick={handleRefresh}
           >
             Refresh
@@ -54,13 +54,13 @@ export default function OwnersApproval() {
         </div>
       </header>
 
-      <section>
+      <section className="card">
         {ownersLoading ? (
-          <div className="flex h-32 items-center justify-center rounded-3xl border border-slate-800 bg-slate-900/60 text-xs text-slate-300">
+          <div className="flex h-32 items-center justify-center rounded-3xl border text-xs">
             Loading owners...
           </div>
         ) : owners.length === 0 ? (
-          <div className="flex h-32 items-center justify-center rounded-3xl border border-dashed border-slate-700 bg-slate-900/40 text-xs text-slate-400">
+          <div className="flex h-32 items-center justify-center rounded-3xl border text-xs">
             No owners in this status.
           </div>
         ) : (
@@ -68,37 +68,29 @@ export default function OwnersApproval() {
             {owners.map((owner) => (
               <div
                 key={owner._id}
-                className="flex flex-col gap-2 rounded-3xl border border-slate-800 bg-slate-900/70 p-3 text-xs shadow-md shadow-slate-900/80"
+                className="flex flex-col gap-2 rounded-3xl border p-3 text-xs card"
               >
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <p className="text-sm font-semibold text-slate-50">
+                    <p className="text-sm font-semibold">
                       {owner.storeName}
                     </p>
-                    <p className="text-[11px] text-slate-400">
+                    <p className="text-[11px]">
                       {owner.name} • {owner.email}
                     </p>
                   </div>
-                  <Badge
-                    className={
-                      owner.status === "approved"
-                        ? "bg-emerald-600/80 text-[10px]"
-                        : owner.status === "rejected"
-                        ? "bg-rose-600/80 text-[10px]"
-                        : "bg-amber-500/80 text-[10px]"
-                    }
-                  >
+                  <Badge className="text-[10px]">
                     {owner.status}
                   </Badge>
                 </div>
 
                 {owner.bio && (
-                  <p className="text-[11px] text-slate-400">
+                  <p className="text-[11px]">
                     {owner.bio}
                   </p>
                 )}
 
-                <p className="text-[11px] text-slate-500">
+                <p className="text-[11px]">
                   WhatsApp: {owner.whatsappNumber}
                 </p>
 
@@ -107,7 +99,7 @@ export default function OwnersApproval() {
                     <>
                       <Button
                         size="sm"
-                        className="h-8 flex-1 rounded-2xl bg-emerald-600 text-[11px] hover:bg-emerald-500"
+                        className="h-8 flex-1 rounded-2xl text-[11px]"
                         onClick={async () => {
                           try {
                             await import("@/api/adminApi").then(({ adminApi }) =>
@@ -122,7 +114,7 @@ export default function OwnersApproval() {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="h-8 flex-1 rounded-2xl border-rose-600/70 text-[11px] text-rose-300 hover:bg-rose-600/20"
+                        className="h-8 flex-1 rounded-2xl text-[11px]"
                         onClick={async () => {
                           try {
                             await import("@/api/adminApi").then(({ adminApi }) =>
@@ -140,7 +132,7 @@ export default function OwnersApproval() {
                     <Button
                       size="sm"
                       variant="outline"
-                      className="h-8 rounded-2xl border-slate-700 text-[11px]"
+                      className="h-8 rounded-2xl text-[11px]"
                       onClick={handleRefresh}
                     >
                       Refresh status

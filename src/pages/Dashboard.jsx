@@ -88,13 +88,13 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 app-theme card">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-lg font-semibold text-slate-50">
+          <h1 className="text-lg font-semibold">
             Welcome back, {adminName}
           </h1>
-          <p className="text-[11px] text-slate-400">
+          <p className="text-[11px]">
             High-level overview of JOHNBOOKS sellers and ebooks.
           </p>
         </div>
@@ -105,13 +105,13 @@ export default function Dashboard() {
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="rounded-3xl border border-slate-800 bg-slate-900/80 p-3 shadow-md shadow-emerald-500/10"
+          className="rounded-3xl border p-3 card"
         >
-          <p className="text-[11px] text-slate-400">Total ebooks</p>
-          <p className="mt-1 text-xl font-semibold text-emerald-400">
+          <p className="text-[11px]">Total ebooks</p>
+          <p className="mt-1 text-xl font-semibold">
             {loading ? "…" : stats.totalEbooks}
           </p>
-          <p className="mt-1 text-[10px] text-slate-500">
+          <p className="mt-1 text-[10px]">
             All titles currently listed across all stores.
           </p>
         </motion.div>
@@ -120,13 +120,13 @@ export default function Dashboard() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05 }}
-          className="rounded-3xl border border-slate-800 bg-slate-900/80 p-3 shadow-md shadow-emerald-500/10"
+          className="rounded-3xl border p-3 card"
         >
-          <p className="text-[11px] text-slate-400">Total stores</p>
-          <p className="mt-1 text-xl font-semibold text-slate-50">
+          <p className="text-[11px]">Total stores</p>
+          <p className="mt-1 text-xl font-semibold">
             {loading ? "…" : stats.totalOwners}
           </p>
-          <p className="mt-1 text-[10px] text-slate-500">
+          <p className="mt-1 text-[10px]">
             Approved + pending bookstore owners and authors.
           </p>
         </motion.div>
@@ -135,15 +135,15 @@ export default function Dashboard() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="rounded-3xl border border-slate-800 bg-slate-900/80 p-3 shadow-md shadow-emerald-500/10"
+          className="rounded-3xl border p-3 card"
         >
-          <p className="text-[11px] text-slate-400">Pending approvals</p>
-          <p className="mt-1 text-xl font-semibold text-amber-400">
+          <p className="text-[11px]">Pending approvals</p>
+          <p className="mt-1 text-xl font-semibold">
             {loading ? "…" : stats.pendingOwners}
           </p>
-          <p className="mt-1 text-[10px] text-slate-500">
+          <p className="mt-1 text-[10px]">
             Sellers waiting for review. Approve them from the{" "}
-            <span className="text-emerald-400">Owners</span> tab.
+            <span>Owners</span> tab.
           </p>
         </motion.div>
 
@@ -151,33 +151,33 @@ export default function Dashboard() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="rounded-3xl border border-slate-800 bg-slate-900/80 p-3 shadow-md shadow-emerald-500/10"
+          className="rounded-3xl border p-3 card"
         >
-          <p className="text-[11px] text-slate-400">Approved stores</p>
-          <p className="mt-1 text-xl font-semibold text-emerald-300">
+          <p className="text-[11px]">Approved stores</p>
+          <p className="mt-1 text-xl font-semibold">
             {loading ? "…" : stats.approvedOwners}
           </p>
-          <p className="mt-1 text-[10px] text-slate-500">
+          <p className="mt-1 text-[10px]">
             Active sellers whose books appear in public search.
           </p>
         </motion.div>
       </div>
 
       {/* Recent ebooks */}
-      <section className="rounded-3xl border border-slate-800 bg-slate-900/80 p-4 shadow-md shadow-slate-900/70">
+      <section className="rounded-3xl border p-4 card">
         <div className="mb-3 flex items-center justify-between gap-2">
           <div>
-            <h2 className="text-sm font-semibold text-slate-50">
+            <h2 className="text-sm font-semibold">
               Recent ebooks
             </h2>
-            <p className="text-[11px] text-slate-400">
+            <p className="text-[11px]">
               Latest titles added by your sellers.
             </p>
           </div>
           <Button
             size="sm"
             variant="outline"
-            className="h-8 rounded-2xl border-slate-700 text-[11px]"
+            className="h-8 rounded-2xl text-[11px]"
             onClick={() => window.location.reload()}
           >
             Refresh
@@ -185,11 +185,11 @@ export default function Dashboard() {
         </div>
 
         {loading ? (
-          <div className="flex h-24 items-center justify-center text-[11px] text-slate-400">
+          <div className="flex h-24 items-center justify-center text-[11px]">
             Loading ebooks…
           </div>
         ) : recentEbooks.length === 0 ? (
-          <div className="flex h-24 items-center justify-center text-[11px] text-slate-400">
+          <div className="flex h-24 items-center justify-center text-[11px]">
             No ebooks yet. Once sellers start uploading, you’ll see them here.
           </div>
         ) : (
@@ -199,25 +199,25 @@ export default function Dashboard() {
               return (
                 <div
                   key={book._id}
-                  className="flex items-start justify-between gap-3 rounded-2xl border border-slate-800/80 bg-slate-950/70 px-3 py-2"
+                  className="flex items-start justify-between gap-3 rounded-2xl border px-3 py-2 card"
                 >
                   <div className="flex-1">
-                    <p className="text-[13px] font-semibold text-slate-50">
+                    <p className="text-[13px] font-semibold">
                       {book.title}
                     </p>
-                    <p className="text-[11px] text-slate-400">
+                    <p className="text-[11px]">
                       {book.author || "Unknown author"}
                     </p>
-                    <p className="mt-1 text-[10px] text-slate-500 line-clamp-2">
+                    <p className="mt-1 text-[10px] line-clamp-2">
                       {book.description || "No description"}
                     </p>
                   </div>
                   <div className="flex flex-col items-end gap-1">
-                    <span className="text-[11px] font-semibold text-emerald-400">
+                    <span className="text-[11px] font-semibold">
                       {formatPrice(book.price)}
                     </span>
                     {owner.storeName && (
-                      <Badge className="bg-slate-800 text-[9px] text-slate-100">
+                      <Badge className="text-[9px]">
                         {owner.storeName}
                       </Badge>
                     )}

@@ -27,25 +27,25 @@ export default function AdminLogin() {
     import.meta.env.VITE_APPADMIN_DISPLAY_NAME || "Admin";
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-950 px-4 py-8 text-slate-50">
+    <div className="flex min-h-screen items-center justify-center px-4 py-8 app-theme">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-sm rounded-3xl border border-slate-800 bg-slate-900/80 p-6 shadow-2xl shadow-emerald-500/30 backdrop-blur-xl"
+        className="w-full max-w-sm rounded-3xl border p-6 shadow-2xl backdrop-blur-xl card"
       >
         <div className="mb-5 text-center">
-          <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-emerald-400">
+          <p className="text-[11px] font-medium uppercase tracking-[0.2em]">
             JOHNBOOKS Admin
           </p>
           <h1 className="mt-1 text-xl font-semibold">
             Sign in as {displayName}
           </h1>
           {location.state?.message && (
-            <p className="mt-2 text-[11px] text-amber-400">
+            <p className="mt-2 text-[11px]">
               {location.state.message}
             </p>
           )}
-          <p className="mt-1 text-[11px] text-slate-400">
+          <p className="mt-1 text-[11px]">
             This area is for the main app admin only.
           </p>
         </div>
@@ -58,7 +58,7 @@ export default function AdminLogin() {
             <Input
               type="text"
               placeholder="Admin username"
-              className="h-9 rounded-2xl border-slate-700 bg-slate-950/80 text-xs"
+              className="h-9 rounded-2xl px-3"
               {...register("username", { required: true })}
             />
           </div>
@@ -69,7 +69,7 @@ export default function AdminLogin() {
             <Input
               type="password"
               placeholder="••••••••"
-              className="h-9 rounded-2xl border-slate-700 bg-slate-950/80 text-xs"
+              className="h-9 rounded-2xl px-3"
               {...register("password", { required: true })}
             />
           </div>
@@ -77,7 +77,7 @@ export default function AdminLogin() {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="mt-2 h-9 w-full rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-xs font-semibold text-slate-950 shadow-lg shadow-emerald-500/40 hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-2 h-9 w-full rounded-2xl font-semibold shadow-lg hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSubmitting ? "Signing in..." : "Sign in"}
           </Button>
